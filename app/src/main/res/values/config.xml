@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="userSystemIp">http://192.168.0.149:31101</string>
+    <string name="userOAuthIp">http://192.168.0.149:31102</string>
+
+    <string name="userClientId">SQAPP</string>
+    <string name="userClientSecret">FFE0B27314BC8DC4E8</string>
+    <string name="userCredentials">U1FBUFA6RkZFMEIyNzMxNEJDOERDNEU4</string>
+
+
+</resources>
