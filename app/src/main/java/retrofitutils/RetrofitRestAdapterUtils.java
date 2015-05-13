@@ -15,6 +15,7 @@ import retrofitutils.data.Token;
 public class RetrofitRestAdapterUtils {
 
     private static RestAdapter userSystemAdapter;
+    private static RestAdapter bxSystemAdapter;
 
     public static RestAdapter getUserSystemInstance(Context context) {
         if (userSystemAdapter == null) {
@@ -22,9 +23,17 @@ public class RetrofitRestAdapterUtils {
 //            networkInterceptors() 网络层拦截器 每次调用一次 方法中只能执行一次请求
 //            interceptors() 应用层拦截器 方法中可以执行多次请求
             client.interceptors().add(new OAuthInterceptor(context, Token.USER_SHARED_TOKEN, R.string.userOAuthIp, R.string.userCredentials).setNeedGetToken(NeedGetTokenUtils.getInstance()));
-            userSystemAdapter = RestAdapterConstructor.getRestAdapter(context.getApplicationContext().getString(R.string.userSystemIp), new OkClient(client));
+            userSystemAdapter = RestAdapterConstructor.getRestAdapter(context.getApplicationContext().getString(R.string.userSystemIp), new OkClient(client), LogLevel.FULL);
         }
         return userSystemAdapter;
+    }
+
+    public static RestAdapter getBXSystemInstance(Context context) {
+        if (bxSystemAdapter == null) {
+            OkHttpClient client = new OkHttpClient();
+            bxSystemAdapter = RestAdapterConstructor.getRestAdapter(context.getApplicationContext().getString(R.string.bxSystemIp), new OkClient(client), LogLevel.FULL);
+        }
+        return bxSystemAdapter;
     }
 
 
@@ -35,7 +44,7 @@ public class RetrofitRestAdapterUtils {
      * @return RestAdapter
      */
     public static RestAdapter getOAuthInstance(String endPoint) {
-        return getOAuthInstance(endPoint, LogLevel.FULL);
+        return getOAuthInstance(endPoint, LogLevel.NONE);
     }
 
     /**

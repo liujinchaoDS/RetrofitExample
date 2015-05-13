@@ -3,6 +3,8 @@
     <string name="userSystemIp">http://192.168.0.149:31101</string>
     <string name="userOAuthIp">http://192.168.0.149:31102</string>
 
+    <string name="bxSystemIp">http://192.168.0.149:8087</string>
+
     <string name="userClientId">SQAPP</string>
     <string name="userClientSecret">FFE0B27314BC8DC4E8</string>
     <string name="userCredentials">U1FBUFA6RkZFMEIyNzMxNEJDOERDNEU4</string>

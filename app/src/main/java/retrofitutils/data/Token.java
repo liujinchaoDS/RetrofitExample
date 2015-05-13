@@ -12,7 +12,7 @@ public final class Token {
     public static final String WY_SHARED_TOKEN = "wy_access_token";
     public static final String OAUTH_GRANT_TYPE = "client_credentials";
 
-    //    , Callback<Token> callback
+    //Callback<Token> callback
     public interface GetToken {
         @FormUrlEncoded
         @POST("/OAuth/Token")
@@ -27,8 +27,6 @@ public final class Token {
     public static String getHeaderProperty(String property) {
         return "Basic " + property;
     }
-
-    ;
 
     @Override
     public String toString() {
