@@ -15,7 +15,7 @@ public class Login {
          * @param pwd 密码
          * @param cb 回调
          */
-        @GET("/api/Login/LoginValidate")
+        @GET("/api/Login/LoginValidate?source=2") //直接在链接中添加固定参数
         void login(@Query("loginname") String name,
                    @Query("password") String pwd, Callback<BaseRetrofit<User>> cb);
 
