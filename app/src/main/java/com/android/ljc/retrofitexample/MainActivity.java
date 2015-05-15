@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,7 @@ import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.IdentityHashMap;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,6 +26,8 @@ import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 import retrofitutils.RetrofitRestAdapterUtils;
 import retrofitutils.bx.JSPUpload;
+import retrofitutils.bx.TSCommit;
+import retrofitutils.data.BaseJSPResult;
 import retrofitutils.data.BaseRetrofit;
 import retrofitutils.data.NetDownload;
 import retrofitutils.data.NetUpload;
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 ((Button) view).setText(error.toString());
             }
         };
-        loginService.login("18636909627", "111111", cb);
+        loginService.login("18636909627", "中文会不会编码", cb);// gson解析错误 得不到响应信息
 //        loginService.login("18636909627", "111111");
     }
 
@@ -236,4 +238,27 @@ public class MainActivity extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
+
+    /**
+     * 测试投诉提交
+     *
+     */
+    public void testTSCommit(final View view) {
+        TSCommit.Commit commit = RetrofitRestAdapterUtils.getBXSystemInstance(this).create(TSCommit.Commit.class);
+        IdentityHashMap<String, String> maps = new IdentityHashMap<>();
+        maps.put(new String("imagePath"), "/upload/complainEvent/20150515/f6f18120-a43e-4831-bee3-07a9b094e884.jpg");
+        maps.put(new String("imagePath"), "/upload/complainEvent/20150515/69601500-8bd6-4ae4-bf23-1882ef609a66.jpg");
+        Callback<BaseJSPResult> cb = new Callback<BaseJSPResult>() {
+            @Override
+            public void success(BaseJSPResult s, Response response) {
+                ((Button) view).setText(s.result + "");
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ((Button) view).setText(error.toString());
+            }
+        };
+        commit.commit(123, "hhh", "dfsf", "123456789", maps, cb);
+    }
 }

@@ -2,6 +2,6 @@ package retrofitutils.data;
 
 public class BaseJSPResult {
 
-    boolean result;
-    String message;
+    public boolean result;
+    public String message;
 }

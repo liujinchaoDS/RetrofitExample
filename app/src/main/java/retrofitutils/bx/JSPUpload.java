@@ -1,12 +1,9 @@
 package retrofitutils.bx;
 
 import retrofit.Callback;
-import retrofit.http.Body;
-import retrofit.http.Headers;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
-import retrofit.http.PartMap;
 import retrofit.mime.TypedFile;
 import retrofitutils.data.BaseJSPResult;
 

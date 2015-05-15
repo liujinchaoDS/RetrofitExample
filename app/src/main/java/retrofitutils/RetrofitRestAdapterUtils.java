@@ -31,6 +31,8 @@ public class RetrofitRestAdapterUtils {
     public static RestAdapter getBXSystemInstance(Context context) {
         if (bxSystemAdapter == null) {
             OkHttpClient client = new OkHttpClient();
+            // 设置超时时间
+            //client.setConnectTimeout(3000, TimeUnit.MILLISECONDS);
             bxSystemAdapter = RestAdapterConstructor.getRestAdapter(context.getApplicationContext().getString(R.string.bxSystemIp), new OkClient(client), LogLevel.FULL);
         }
         return bxSystemAdapter;
