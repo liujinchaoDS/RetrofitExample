@@ -1,52 +1,20 @@
 package com.example.version2.utils;
 
 
-import android.content.Context;
-
-import com.example.version2.R;
 import com.example.version2.data.Response;
 
-import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RetrofitUtils {
+public abstract class RetrofitUtils {
 
-    private static Retrofit retrofit;
-
-    public static Retrofit getInstance(Context context) {
-        return getInstance(context.getString(R.string.address_host));
-    }
-
-    public static IRetrofit getService(Context context) {
-        return getInstance(context).create(IRetrofit.class);
-    }
-
-    public static APIService getService() {
-        return getInstance("https://api.github.com/").create(APIService.class);
-    }
-
-    public static Retrofit getInstance(String baseUrl) {
-        if (retrofit == null) {
-            //必须使用Builder，直接new OkHttpClient，无法添加Interceptor，因为interceptors()返回的列表不允许改变
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//            builder.interceptors().add(new HttpLoggingInterceptor());
-            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-            OkHttpClient client = builder.build();
-            retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).addConverterFactory(GsonConverterFactory.create()).build();
-//            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        }
-        return retrofit;
-    }
+     /*
+    * https://github.com/square/okhttp/blob/master/samples/guide/src/main/java/okhttp3/recipes/Progress.java
+    * http://stackoverflow.com/questions/29958881/download-progress-with-rxjava-okhttp-and-okio-in-android
+    * 下载文件的进度
+    * */
 
 
     /**
@@ -74,12 +42,11 @@ public class RetrofitUtils {
 
     /**
      * http://www.jianshu.com/p/e9e03194199e
-     * 木有十分懂，，
      *
      * @param <T>
      * @return
      */
-    protected <T> Observable.Transformer<T, T> applySchedulers() {
+    public static <T> Observable.Transformer<T, T> applySchedulers() {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> observable) {
@@ -88,30 +55,5 @@ public class RetrofitUtils {
             }
         };
     }
-
-
-    /**
-     * 当{@link IRetrofit}中接口的注解为{@link retrofit2.http.Multipart}时，参数为{@link RequestBody}
-     * 生成对应的RequestBody
-     *
-     * @param param
-     * @return
-     */
-    protected RequestBody createRequestBody(int param) {
-        return RequestBody.create(MediaType.parse("text/plain"), String.valueOf(param));
-    }
-
-    protected RequestBody createRequestBody(long param) {
-        return RequestBody.create(MediaType.parse("text/plain"), String.valueOf(param));
-    }
-
-    protected RequestBody createRequestBody(String param) {
-        return RequestBody.create(MediaType.parse("text/plain"), param);
-    }
-
-    protected RequestBody createRequestBody(File param) {
-        return RequestBody.create(MediaType.parse("image/*"), param);
-    }
-
 
 }

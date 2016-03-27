@@ -1,8 +1,8 @@
 package com.example.version2;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +16,7 @@ import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 
     public static final String TAG = "BaseActivity";
     /**

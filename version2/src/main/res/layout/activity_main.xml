@@ -12,7 +12,20 @@
 
    <Button
        android:layout_width="match_parent"
-       android:text="emoij"
-       android:onClick="emoij"
+       android:text="simple"
+       android:onClick="simple"
        android:layout_height="wrap_content" />
+
+   <Button
+       android:layout_width="match_parent"
+       android:text="flatMap"
+       android:onClick="flatMap"
+       android:layout_height="wrap_content" />
+
+   <Button
+       android:layout_width="match_parent"
+       android:text="zip"
+       android:onClick="zip"
+       android:layout_height="wrap_content" />
+
 </LinearLayout>
